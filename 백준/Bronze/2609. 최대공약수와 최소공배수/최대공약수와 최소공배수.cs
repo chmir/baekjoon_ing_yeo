@@ -48,12 +48,10 @@ LCM(a,b) = a*b / GCD(a,b)
 int[] input = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
 int a = input[0];
 int b = input[1];
-
 //연산
-//r = x%y 는 항상 0 <= r < y 이므로 y가 계속 감소 -> 결국 0이 되고, 그 마지막 x 값이 gcd가 된다.
+//유클리드 호제법: gcd(x, y) = gcd(y, x % y), y가 0이면 x가 gcd
 int Gcd(int x, int y) 
 {
-    //유클리드 호제법: gcd(x, y) = gcd(y, x % y), y가 0이면 x가 gcd
     while (y != 0)
     {
         int r = x % y;
@@ -62,11 +60,9 @@ int Gcd(int x, int y)
     }
     return x;
 }
-
+//GCD계산
 int gcd = Gcd(a, b);
-
 //LCM 계산 
 int lcm = (a / gcd) * b;
-
 //출력
 Console.Write($"{gcd}\n{lcm}");
