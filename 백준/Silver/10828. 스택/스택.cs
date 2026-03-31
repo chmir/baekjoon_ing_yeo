@@ -17,27 +17,29 @@ while (N-- > 0)
     //입력 (push가 있는 경우 생각)
     string[] input = sr.ReadLine().Split();
 
-    switch (input[0])
+    switch (input[0][0]) //더 빨리 한다면 앞글자만 보고 판단하자
     {
-        case "push":
-            s.Push(int.Parse(input[1]));
+        case 'p': //"push", "pop"
+            if (input[0].Length == 3) { //pop
+                //TryPop은 스택 맨 위에 값이 있다면 result에 넣고 스택에서 제거한 뒤, 성공 여부를 bool값으로 반환함
+                //삼항 연산자 활용으로 Pop을 성공했다면 제거한 값을 보여주고, 실패했다면 -1 반환
+                sw.WriteLine(s.TryPop(out int result) ? result : -1);
+            }
+            else //push
+            {
+                s.Push(int.Parse(input[1]));
+            }
             break;
 
-        case "pop":
-            //TryPop은 스택 맨 위에 값이 있다면 result에 넣고 스택에서 제거한 뒤, 성공 여부를 bool값으로 반환함
-            //삼항 연산자 활용으로 Pop을 성공했다면 제거한 값을 보여주고, 실패했다면 -1 반환
-            sw.WriteLine(s.TryPop(out int result) ? result : -1);
-            break;
-
-        case "size":
+        case 's': //"size"
             sw.WriteLine(s.Count);
             break;
 
-        case "empty":
+        case 'e': //"empty"
             sw.WriteLine(s.Count == 0 ? 1 : 0);
             break;
 
-        case "top":
+        case 't': //"top"
             //TryPeek는 스택 맨 위에 값이 있다면 result에 넣고, 성공 여부를 bool값으로 반환함
             sw.WriteLine(s.TryPeek(out int result2) ? result2 : -1);
             break;
